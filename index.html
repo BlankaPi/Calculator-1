@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <main>
+        <form id= "calc-form">
+            <div id="calc-header">
+                
+                <div data-previous-operand class="previous-operand"></div>
+                <div data-current-operand class="current-operand"></div>
+            </div>
+            <div id="calc-main">
+                <div class="buttons-group">
+                    <button data-type="clear" value="clear" class="button button-grey">
+                        AC
+                    </button>
+                    <button data-type="delete" value="invert" class="button button-grey">
+                        DEL
+                    </button>
+                    <button data-percent value="%" class="button button-grey">
+                        %
+                    </button>
+                    <button data-type="operator" value="/" class="button button-dark">
+                        /
+                    </button>
+                </div>
+                <div class="buttons-group">
+                    <button data-number value="7" class="button button-blue">
+                        7
+                    </button>
+                    <button data-number value="8" class="button button-blue">
+                        8
+                    </button>
+                    <button data-number value="9" class="button button-blue">
+                        9
+                    </button>
+                    <button data-type="operator" value="*" class="button button-dark">
+                        *
+                    </button>   
+                </div>
+                <div class="buttons-group">
+                    <button data-number value="4" class="button button-blue">
+                        4
+                    </button>
+                    <button data-number value="5" class="button button-blue">
+                        5
+                    </button>
+                    <button data-number value="6" class="button button-blue">
+                        6
+                    </button>
+                    <button data-type="operator" value="-" class="button button-dark">
+                        -
+                    </button>   
+                </div>
+                <div class="buttons-group">
+                    <button data-number value="1" class="button button-blue">
+                        1
+                    </button>
+                    <button data-number value="2" class="button button-blue">
+                        2
+                    </button>
+                    <button data-number value="3" class="button button-blue">
+                        3
+                    </button>
+                    <button data-type="operator" value="+" class="button button-dark">
+                        +
+                    </button>   
+                </div>
+                <div class="buttons-group">
+                    <button data-number value="0" class="button button-blue big">
+                        0
+                    </button>
+                    <button data-number value="." class="button button-blue">
+                        .
+                    </button>
+                    <button data-type="equals" value="=" class="button button-green">
+                        =
+                    </button> 
+                </div>
+            </div>
+        </form>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

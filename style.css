@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap');
+
+*,
+*::after,
+*::before {
+  padding: 0px;
+  margin: 0px;
+  font-family: inherit;
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+body {
+    background-color: #333333;
+    font-size: 1.5rem;
+}
+  
+html {
+    font-family: "Nova Mono", monospace, sans-serif;
+}
+
+
+#calc-form {
+    --outline: 0 0 0 0.125rem black;
+    --border: 0.5rem solid;
+    --text-color: #333;
+    --text-color-alt: #fff;
+    --hue: 204;
+    --saturation: 70%;
+    --lightness: 80%;
+
+    color: var(--text-color);
+    width: 100%;
+    width: 300px;
+    padding: 0.6rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -237px;
+    margin-left: -150px;
+    background-color: hsl(var(--hue), var(--saturation), var(--lightness));
+    border: var(--border);
+    border-top-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) + 30%));
+    border-right-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) + 10%));
+    border-bottom-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) - 30%));
+    border-left-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) - 15%));
+    box-shadow: var(--outline);
+}
+
+#calc-header {
+    --hue: 0;
+    --saturation: 0%;
+    --lightness: 42%;
+
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    margin-bottom: 0.2rem;
+    padding: 0.2rem;
+    font-size: 3rem;
+    border-radius: 0.15rem;
+    height: 123px;
+      
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: column;
+    
+
+    background: linear-gradient(180deg,  hsl(0, 0%, 75%), hsl(192, 15%, 94%));
+    border: var(--border);
+    border-top-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) - 30%));
+    border-right-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) - 10%));
+    border-bottom-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) + 30%));
+    border-left-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) + 15%));
+    box-shadow: var(--outline);
+}
+
+#calc-header .previous-operand {
+    font-size: 1.5rem;;
+}
+
+.buttons-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+    padding-top: 0.6rem;
+}
+
+.button {
+    --hue: 204;
+    --saturation: 70%;
+    --lightness: 50%;
+    --border: 0.3rem solid;
+    --outline: 0 0 0 0.125rem black;
+    --text-color: #333;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.15rem;
+    width: 60px;
+    height: 60px;
+    color: var(--text-color);
+    background: hsl(var(--hue), var(--saturation), var(--lightness));
+    font-size: 1.8rem;
+    cursor: pointer;
+
+
+    border: var(--border);
+    border-top-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) + 20%));
+    border-right-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) + 20%));
+    border-bottom-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) - 20%));
+    border-left-color: hsl(var(--hue), var(--saturation), calc(var(--lightness) - 20%));
+    box-shadow: var(--outline);
+}
+
+.button-grey {
+    --hue: 0;
+    --saturation: 0%;
+    --lightness: 80%;
+    color: var(--text-color);
+}
+
+.button-dark {
+    --hue: 210;
+    --saturation: 29%;
+    --lightness: 35%;
+    color: var(--text-color-alt);
+}
+
+.button-green {
+    --hue: 140;
+    --saturation: 56%;
+    --lightness: 44%;
+    color: var(--text-color-alt);
+}
+
+.big {
+    width:128px;
+}
+
+.button:hover {
+    --hue: 48;
+    --saturation: 89%;
+    --lightness: 50%;
+    color: var(--text-color);
+}
+
+
+.button.active {
+    --hue: 48;
+    --saturation: 89%;
+    --lightness: 30%;
+    color: var(--text-color);
+}
