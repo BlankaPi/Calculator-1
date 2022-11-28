@@ -1,6 +1,8 @@
 window.onload = function () {
     console.log("Hello calculator!");
-    // calculator.init();
+    window.alert(`Please note:
+- the calculator is not for scientific purposes
+- you can enter up to 9 numbers`)
 };
 
 const form = document.getElementById("calc-form");
@@ -10,14 +12,14 @@ form.addEventListener("submit", (e) => {
 
 class Calculator {
 
-    //konstruuję kalkulator
-    constructor(previousOperantText, currentOperantText) {
-        this.previousOperantText = previousOperantText;
-        this.currentOperantText = currentOperantText;
+    //constructing a calculator
+    constructor(previousOperantNode, currentOperantNode) {
+        this.previousOperantNode = previousOperantNode;
+        this.currentOperantNode = currentOperantNode;
         this.clear();
     }
 
-    //przypisuję kalkulatorowi odpowiednie funkcje
+    //calculator functions
 
     clear() {
         this.previousOperand = "";
@@ -26,15 +28,19 @@ class Calculator {
     }
 
     delete() {
-        this.currentOperand = this.currentOperand.slice(0, -1);        
+        this.currentOperand = this.currentOperand.toString().slice(0, -1);      
     }
 
     
     percent() {
-        this.currentOperand = parseFloat(this.currentOperand) / 100;
+        if (this.currentOperand !== "") {
+            this.currentOperand = parseFloat(this.currentOperand) / 100;
+        } else {
+            return
+        }
     }
 
-    // pobiera numer z guzika
+    // taking number from the button
     appendNumber(number) {
         if (number === "." && this.currentOperand.includes(".")) return;
         if (this.currentOperand.length >= 9) return;
@@ -43,7 +49,7 @@ class Calculator {
         
     }
 
-    //wybranie operatora 
+    // choosing the operator
     chooseOperator(operator) {
         if (this.currentOperand === "") return;
         if (this.previousOperand !== "") {
@@ -78,43 +84,81 @@ class Calculator {
                 return;   
         }
 
-        this.currentOperand = computation;
-        this.operator = undefined;
-        this.previousOperand = "";
-
-    }
-
-    //pokazuje numer w okienku
-    updateDisplay() {
-        this.currentOperantText.innerText = this.currentOperand;
-        this.previousOperantText.innerText = this.previousOperand;
-        if (this.operator != null) {
-            this.previousOperantText.innerText = 
-                this.previousOperand + this.operator;
+        console.log(computation);
+        let compString = computation.toString();
+        if (compString.length > 9) {
+            this.previousOperand = "result is rounded";
+            console.log(this.previousOperand);
+            if (compString.includes(".")) {
+                switch(compString.indexOf(".")) {
+                    case 1:
+                        computation = computation.toFixed(7);
+                        break;
+                    case 2:
+                        computation = computation.toFixed(6);
+                        break;
+                    case 3:
+                        computation = computation.toFixed(5);
+                        break;
+                    case 4:
+                        computation = computation.toFixed(4);
+                        break;
+                    case 5:
+                        computation = computation.toFixed(3);
+                        break;
+                    case 6:
+                        computation = computation.toFixed(2);
+                        break;
+                    case 7:
+                        computation = computation.toFixed(1);
+                        break;
+                    case 8:
+                        computation = computation.toFixed(0);
+                        break;
+                    default:
+                        return;                
+                    }
+            }
         }
 
-        
+        this.currentOperand = computation;
+        console.log(computation);        
+
+        this.operator = undefined;
+        if (compString.length <= 9) {
+            this.previousOperand = "";
+        }
+    } 
+
+    // showing the number in viewer
+    updateDisplay() {
+        this.currentOperantNode.innerText = this.currentOperand;
+        this.previousOperantNode.innerText = this.previousOperand;
+        if (this.operator != null) {
+            this.previousOperantNode.innerText = 
+                this.previousOperand + this.operator;
+        }        
     }
 }
 
 // buttons
 const operandButtons = document.querySelectorAll("[data-number]");
-const operatorButtons = document.querySelectorAll("button[data-type=operator]");
-const clearButton = document.querySelector("button[data-type=clear]");
-const equalsButton = document.querySelector("button[data-type=equals]");
-const deleteButton = document.querySelector("button[data-type=delete]");
-const percentButton = document.querySelector("[data-percent]");
+const operatorButtons = document.querySelectorAll("[data-operator]");
+const clearButton = document.querySelector(".clear");
+const equalsButton = document.querySelector(".equals");
+const deleteButton = document.querySelector(".delete");
+const percentButton = document.querySelector(".percent");
 
 //output
-const previousOperantText = document.querySelector("[data-previous-operand]");
-const currentOperantText = document.querySelector("[data-current-operand]");
+const previousOperantNode = document.querySelector("[data-previous-operand]");
+const currentOperantNode = document.querySelector("[data-current-operand]");
 
-//tworzę nowy kalkulator
+//creating "new Calculator"
 
-const calculator = new Calculator(previousOperantText, currentOperantText);
+const calculator = new Calculator(previousOperantNode, currentOperantNode);
 
 
-// dlaczego current target??
+// why "current target"??
 operandButtons.forEach((button) => {
     button.addEventListener("click", (e) => {       
         calculator.appendNumber(button.innerText);
@@ -154,7 +198,7 @@ percentButton.addEventListener("click", button => {
     calculator.updateDisplay();
 })
 
-
+// adding active class to buttons
 
 operandButtons.forEach((button) => {
     button.addEventListener("mousedown", (e) => {
@@ -169,79 +213,91 @@ operandButtons.forEach((button) => {
     })
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* operandButtons.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-        e.currentTarget.classList.toggle("active");
-
-        let isOperator = false;
-        //console.log(e.target.value);
-
-        //dlaczego "currentTarget"?
-
-        if (input.value == "0") {
-            input.value = e.target.value;
-        } else if (input.value.includes(".")) {
-            input.value = input.value + e.target.value.replace(".", "");
-        } else if (isOperator) {
-            input.value = e.target.value;
-        } else {
-            input.value = input.value + e.target.value;
-        }
-
-        //console.log(input.value);
+operatorButtons.forEach((button) => {
+    button.addEventListener("mousedown", (e) => {
+        e.currentTarget.classList.add("active");              
     })
 })
 
-let result = [];
 
-operatorButtons.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-        e.currentTarget.classList.add("active");
-
-        let lastItem = result[result.length - 1];
-
-        if (e.target.value == "%") {
-            input.value = parseFloat(input.value) / 100;
-        } else if (e.target.value == "invert") {
-            input.value = parseFloat(input.value) * -1;
-        } else if (e.target.value == "=") {
-            result.push(input.value);
-            console.log(result);
-            input.value = eval(result.join(""));
-            result = [];
-        } else if (["/", "*", "-", "+"].includes(lastItem)) {
-            result.pop();
-            result.push(e.target.value);
-        } else {
-            result.push(input.value);
-            result.push(e.target.value);
-        }
-        
+operatorButtons.forEach((button) => {
+    button.addEventListener("mouseup", (e) => {
+        e.currentTarget.classList.remove("active");              
     })
-}) */
+})
 
+
+
+clearButton.addEventListener("mousedown", button => {
+    button.currentTarget.classList.add("active");
+})
+
+clearButton.addEventListener("mouseup", button => {
+    button.currentTarget.classList.remove("active");
+})
+
+
+equalsButton.addEventListener("mousedown", button => {
+    button.currentTarget.classList.add("active");
+})
+
+equalsButton.addEventListener("mouseup", button => {
+    button.currentTarget.classList.remove("active");
+})
+
+
+percentButton.addEventListener("mousedown", button => {
+    button.currentTarget.classList.add("active");
+})
+
+percentButton.addEventListener("mouseup", button => {
+    button.currentTarget.classList.remove("active");
+})
+
+
+deleteButton.addEventListener("mousedown", button => {
+    button.currentTarget.classList.add("active");
+})
+
+deleteButton.addEventListener("mouseup", button => {
+    button.currentTarget.classList.remove("active");
+})
+
+
+
+document.addEventListener("keydown", function(event) {
+    let key_code = event.key;
+
+    switch (key_code) {
+        case "0":
+            console.log("0");
+            break;
+        case "1":
+            console.log("1");
+            break;
+        case "2":
+            console.log("2");
+            break;    
+        case "3":
+            console.log("3");
+            break;
+        case "4":
+            console.log("4");
+            break;
+        case "5":
+            console.log("5");
+            break;
+        case "6":
+            console.log("6");
+            break;
+        case "7":
+            console.log("7");
+            break;
+        case "8":
+            console.log("8");
+            break;
+        case "9":
+            console.log("9");
+            break;
+    } 
+}); 
