@@ -270,34 +270,84 @@ document.addEventListener("keydown", function(event) {
 
     switch (key_code) {
         case "0":
-            console.log("0");
+            calculator.appendNumber(Number(key_code));
+            calculator.updateDisplay();
             break;
         case "1":
-            console.log("1");
+            calculator.appendNumber(Number(key_code));
+            calculator.updateDisplay();
             break;
         case "2":
-            console.log("2");
+            calculator.appendNumber(Number(key_code));
+            calculator.updateDisplay();
             break;    
         case "3":
-            console.log("3");
+            calculator.appendNumber(Number(key_code));
+            calculator.updateDisplay();
             break;
         case "4":
-            console.log("4");
+            calculator.appendNumber(Number(key_code));
+            calculator.updateDisplay();
             break;
         case "5":
-            console.log("5");
+            calculator.appendNumber(Number(key_code));
+            calculator.updateDisplay();
             break;
         case "6":
-            console.log("6");
+            calculator.appendNumber(Number(key_code));
+            calculator.updateDisplay();
             break;
         case "7":
-            console.log("7");
+            calculator.appendNumber(Number(key_code));
+            calculator.updateDisplay();
             break;
         case "8":
-            console.log("8");
+            calculator.appendNumber(Number(key_code));
+            calculator.updateDisplay();
             break;
         case "9":
-            console.log("9");
+            calculator.appendNumber(Number(key_code));
+            calculator.updateDisplay();
+            break;
+        case ".":
+            calculator.appendNumber(key_code);
+            calculator.updateDisplay();
+            break;
+        case ",":
+            calculator.appendNumber(".");
+            calculator.updateDisplay();
+            break;     
+        case "/":
+            calculator.chooseOperator(key_code)
+            calculator.updateDisplay()
+            break;
+        case "*":
+            calculator.chooseOperator(key_code)
+            calculator.updateDisplay()
+            break;
+        case "-":
+            calculator.chooseOperator(key_code)
+            calculator.updateDisplay()
+            break;
+        case "+":
+            calculator.chooseOperator(key_code)
+            calculator.updateDisplay()
+            break;
+        case "%":
+            calculator.percent()
+            calculator.updateDisplay()
+            break;
+        case "Backspace":
+            calculator.delete();
+            calculator.updateDisplay();
+            break;
+        case "Escape":
+            calculator.clear();
+            calculator.updateDisplay();
+            break;
+        case "Enter":
+            calculator.compute();
+            calculator.updateDisplay();
             break;
     } 
 }); 
