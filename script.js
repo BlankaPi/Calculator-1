@@ -28,10 +28,10 @@ class Calculator {
     }
 
     delete() {
-        this.currentOperand = this.currentOperand.toString().slice(0, -1);      
+        this.currentOperand = this.currentOperand.toString().slice(0, -1);
     }
 
-    
+
     percent() {
         if (this.currentOperand !== "") {
             this.currentOperand = parseFloat(this.currentOperand) / 100;
@@ -46,7 +46,7 @@ class Calculator {
         if (this.currentOperand.length >= 9) return;
 
         this.currentOperand = this.currentOperand.toString() + number.toString()
-        
+
     }
 
     // choosing the operator
@@ -65,9 +65,9 @@ class Calculator {
         const prev = parseFloat(this.previousOperand);
         const current = parseFloat(this.currentOperand);
 
-        if(isNaN(prev) || isNaN(current)) return;
-        
-        switch(this.operator) {
+        if (isNaN(prev) || isNaN(current)) return;
+
+        switch (this.operator) {
             case "+":
                 computation = prev + current;
                 break;
@@ -79,9 +79,9 @@ class Calculator {
                 break;
             case "*":
                 computation = prev * current;
-                break; 
+                break;
             default:
-                return;   
+                return;
         }
 
         console.log(computation);
@@ -90,7 +90,7 @@ class Calculator {
             this.previousOperand = "result is rounded";
             console.log(this.previousOperand);
             if (compString.includes(".")) {
-                switch(compString.indexOf(".")) {
+                switch (compString.indexOf(".")) {
                     case 1:
                         computation = computation.toFixed(7);
                         break;
@@ -116,28 +116,28 @@ class Calculator {
                         computation = computation.toFixed(0);
                         break;
                     default:
-                        return;                
-                    }
+                        return;
+                }
             }
         }
 
         this.currentOperand = computation;
-        console.log(computation);        
+        console.log(computation);
 
         this.operator = undefined;
         if (compString.length <= 9) {
             this.previousOperand = "";
         }
-    } 
+    }
 
     // showing the number in viewer
     updateDisplay() {
         this.currentOperantNode.innerText = this.currentOperand;
         this.previousOperantNode.innerText = this.previousOperand;
         if (this.operator != null) {
-            this.previousOperantNode.innerText = 
+            this.previousOperantNode.innerText =
                 this.previousOperand + this.operator;
-        }        
+        }
     }
 }
 
@@ -160,7 +160,7 @@ const calculator = new Calculator(previousOperantNode, currentOperantNode);
 
 // why "current target"??
 operandButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {       
+    button.addEventListener("click", (e) => {
         calculator.appendNumber(button.innerText);
         calculator.updateDisplay();
     })
@@ -202,27 +202,27 @@ percentButton.addEventListener("click", button => {
 
 operandButtons.forEach((button) => {
     button.addEventListener("mousedown", (e) => {
-        e.currentTarget.classList.add("active");              
+        e.currentTarget.classList.add("active");
     })
 })
 
 
 operandButtons.forEach((button) => {
     button.addEventListener("mouseup", (e) => {
-        e.currentTarget.classList.remove("active");              
+        e.currentTarget.classList.remove("active");
     })
 })
 
 operatorButtons.forEach((button) => {
     button.addEventListener("mousedown", (e) => {
-        e.currentTarget.classList.add("active");              
+        e.currentTarget.classList.add("active");
     })
 })
 
 
 operatorButtons.forEach((button) => {
     button.addEventListener("mouseup", (e) => {
-        e.currentTarget.classList.remove("active");              
+        e.currentTarget.classList.remove("active");
     })
 })
 
@@ -265,70 +265,31 @@ deleteButton.addEventListener("mouseup", button => {
 
 
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
     let key_code = event.key;
 
     switch (key_code) {
         case "0":
-            calculator.appendNumber(Number(key_code));
-            calculator.updateDisplay();
-            break;
         case "1":
-            calculator.appendNumber(Number(key_code));
-            calculator.updateDisplay();
-            break;
         case "2":
-            calculator.appendNumber(Number(key_code));
-            calculator.updateDisplay();
-            break;    
         case "3":
-            calculator.appendNumber(Number(key_code));
-            calculator.updateDisplay();
-            break;
         case "4":
-            calculator.appendNumber(Number(key_code));
-            calculator.updateDisplay();
-            break;
         case "5":
-            calculator.appendNumber(Number(key_code));
-            calculator.updateDisplay();
-            break;
         case "6":
-            calculator.appendNumber(Number(key_code));
-            calculator.updateDisplay();
-            break;
         case "7":
-            calculator.appendNumber(Number(key_code));
-            calculator.updateDisplay();
-            break;
         case "8":
-            calculator.appendNumber(Number(key_code));
-            calculator.updateDisplay();
-            break;
         case "9":
-            calculator.appendNumber(Number(key_code));
-            calculator.updateDisplay();
-            break;
         case ".":
-            calculator.appendNumber(key_code);
+            calculator.appendNumber(Number(key_code));
             calculator.updateDisplay();
             break;
         case ",":
             calculator.appendNumber(".");
             calculator.updateDisplay();
-            break;     
+            break;
         case "/":
-            calculator.chooseOperator(key_code)
-            calculator.updateDisplay()
-            break;
         case "*":
-            calculator.chooseOperator(key_code)
-            calculator.updateDisplay()
-            break;
         case "-":
-            calculator.chooseOperator(key_code)
-            calculator.updateDisplay()
-            break;
         case "+":
             calculator.chooseOperator(key_code)
             calculator.updateDisplay()
@@ -341,7 +302,7 @@ document.addEventListener("keydown", function(event) {
             calculator.delete();
             calculator.updateDisplay();
             break;
-        case "Escape":
+        case "Delete":
             calculator.clear();
             calculator.updateDisplay();
             break;
@@ -349,5 +310,7 @@ document.addEventListener("keydown", function(event) {
             calculator.compute();
             calculator.updateDisplay();
             break;
-    } 
+        default:
+            window.alert(`unrecognized symbol`);
+    }
 }); 
